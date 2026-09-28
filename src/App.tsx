@@ -480,6 +480,7 @@ export default function App() {
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
       gtag('config', ${JSON.stringify(analyticsId)}, { cookie_flags: 'SameSite=None;Secure' });
+      gtag('config', 'G-S1RPXDFXNC', { cookie_flags: 'SameSite=None;Secure' });
     `;
     document.head.appendChild(scriptInit);
   }, [analyticsId, analyticsConsent]);
