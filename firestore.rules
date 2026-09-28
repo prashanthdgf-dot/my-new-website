@@ -26,11 +26,12 @@ service cloud.firestore {
       allow read, update, delete: if false;
     }
 
-    // Webhook Events: Allow creation from webhook ingestion and read for monitoring
+    // Webhook Events: the server may append events, but nobody can read them through the public API.
+    // Payloads contain lead PII (names, phone numbers, WhatsApp messages). Read them in the Firebase console.
     match /webhook_events/{eventId} {
-      allow create: if request.resource.data.source is string;
-      allow read: if true;
-      allow update, delete: if false;
+      allow create: if request.resource.data.source is string
+                    && request.resource.data.source.size() <= 100;
+      allow read, update, delete: if false;
     }
 
   }
