@@ -788,7 +788,7 @@ export const TRAINERS_LOC = {
         'Expert Strength Coach',
         'Mr. Karnataka Medalist'
       ],
-      instagramUrl: 'https://instagram.com/dhanush_gold_fitness'
+      instagramUrl: 'https://www.instagram.com/dhanus_goldfitness/'
     },
     {
       id: 'dhananjay',
@@ -801,7 +801,7 @@ export const TRAINERS_LOC = {
         'Expert Strength Coach',
         'Mr. Karnataka Medalist'
       ],
-      instagramUrl: 'https://instagram.com/dhanush_gold_fitness'
+      instagramUrl: 'https://www.instagram.com/dhanus_goldfitness/'
     },
     {
       id: 'balaji',
@@ -814,7 +814,7 @@ export const TRAINERS_LOC = {
         'Certified Strength Coach',
         'Nutrition & Wellness Expert'
       ],
-      instagramUrl: 'https://instagram.com/dhanush_gold_fitness'
+      instagramUrl: 'https://www.instagram.com/dhanus_goldfitness/'
     },
     {
       id: 'kiran',
@@ -827,7 +827,7 @@ export const TRAINERS_LOC = {
         'Biomechanics Specialist',
         'Corrective Exercise Expert'
       ],
-      instagramUrl: 'https://instagram.com/dhanush_gold_fitness'
+      instagramUrl: 'https://www.instagram.com/dhanus_goldfitness/'
     },
     {
       id: 'manju',
@@ -840,7 +840,7 @@ export const TRAINERS_LOC = {
         'Body Recomposition Coach',
         'Performance Enhancement Specialist'
       ],
-      instagramUrl: 'https://instagram.com/dhanush_gold_fitness'
+      instagramUrl: 'https://www.instagram.com/dhanus_goldfitness/'
     },
     {
       id: 'vinay',
@@ -853,7 +853,7 @@ export const TRAINERS_LOC = {
         'Strength & Performance Specialist',
         'Clinical Nutritionist'
       ],
-      instagramUrl: 'https://instagram.com/dhanush_gold_fitness'
+      instagramUrl: 'https://www.instagram.com/dhanus_goldfitness/'
     }
   ],
   kn: [
@@ -868,7 +868,7 @@ export const TRAINERS_LOC = {
         'ಪರಿಣಿತ ಸ್ಟ್ರೆಂತ್ ಕೋಚ್',
         'ಮಿಸ್ಟರ್ ಕರ್ನಾಟಕ ಪದಕ ವಿಜೇತರು'
       ],
-      instagramUrl: 'https://instagram.com/dhanush_gold_fitness'
+      instagramUrl: 'https://www.instagram.com/dhanus_goldfitness/'
     },
     {
       id: 'dhananjay',
@@ -881,7 +881,7 @@ export const TRAINERS_LOC = {
         'ಪರಿಣಿತ ಸ್ಟ್ರೆಂತ್ ಕೋಚ್',
         'ಮಿಸ್ಟರ್ ಕರ್ನಾಟಕ ಪದಕ ವಿಜೇತರು'
       ],
-      instagramUrl: 'https://instagram.com/dhanush_gold_fitness'
+      instagramUrl: 'https://www.instagram.com/dhanus_goldfitness/'
     },
     {
       id: 'balaji',
@@ -894,7 +894,7 @@ export const TRAINERS_LOC = {
         'ಪ್ರಮಾಣೀಕೃತ ಸ್ಟ್ರೆಂತ್ ಕೋಚ್',
         'ಪೌಷ್ಟಿಕಾಂಶ ಮತ್ತು ಕ್ಷೇಮ ತಜ್ಞರು'
       ],
-      instagramUrl: 'https://instagram.com/dhanush_gold_fitness'
+      instagramUrl: 'https://www.instagram.com/dhanus_goldfitness/'
     },
     {
       id: 'kiran',
@@ -907,7 +907,7 @@ export const TRAINERS_LOC = {
         'ಬಯೋಮೆಕಾನಿಕ್ಸ್ ತಜ್ಞರು',
         'ಕರೆಕ್ಟಿವ್ ಎಕ್ಸರ್ಸೈಜ್ ಎಕ್ಸ್‌ಪರ್ಟ್'
       ],
-      instagramUrl: 'https://instagram.com/dhanush_gold_fitness'
+      instagramUrl: 'https://www.instagram.com/dhanus_goldfitness/'
     },
     {
       id: 'manju',
@@ -920,7 +920,7 @@ export const TRAINERS_LOC = {
         'ಬಾಡಿ ರಿಕಂಪೊಸಿಷನ್ ಕೋಚ್',
         'ಪರ್ಫಾರ್ಮೆನ್ಸ್ ಎನ್ಹಾನ್ಸ್‌ಮೆಂಟ್ ತಜ್ಞರು'
       ],
-      instagramUrl: 'https://instagram.com/dhanush_gold_fitness'
+      instagramUrl: 'https://www.instagram.com/dhanus_goldfitness/'
     },
     {
       id: 'vinay',
@@ -933,7 +933,7 @@ export const TRAINERS_LOC = {
         'ಸ್ಟ್ರೆಂತ್ ಮತ್ತು ಪರ್ಫಾರ್ಮೆನ್ಸ್ ತಜ್ಞರು',
         'ಕ್ಲಿನಿಕಲ್ ನ್ಯೂಟ್ರಿಷನಿಸ್ಟ್'
       ],
-      instagramUrl: 'https://instagram.com/dhanush_gold_fitness'
+      instagramUrl: 'https://www.instagram.com/dhanus_goldfitness/'
     }
   ]
 };

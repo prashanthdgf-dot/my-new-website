@@ -39,15 +39,14 @@ export const CONTACT_INFO = {
   social: {
     youtube: 'https://www.youtube.com/@dhanusgoldfitnesskengeri',
     instagram: 'https://www.instagram.com/dhanus_goldfitness/',
-    facebookPage: 'https://www.facebook.com/dhanusgoldfitness/',
-    facebookProfile: 'https://www.facebook.com/profile.php?id=100079558913150',
-    facebook: 'https://www.facebook.com/dhanusgoldfitness/',
+    facebookPage: 'https://www.facebook.com/people/Dhanus-Goldfitness/100079558913150/',
+    facebookProfile: 'https://www.facebook.com/people/Dhanus-Goldfitness/100079558913150/',
+    facebook: 'https://www.facebook.com/people/Dhanus-Goldfitness/100079558913150/',
     email: 'mailto:dhanusgoldfitness@gmail.com',
     website: 'https://www.dhanusgoldfitness.com',
     map: 'https://maps.app.goo.gl/yB41yXc1GgFDYtwv5',
     googleMaps: 'https://maps.app.goo.gl/yB41yXc1GgFDYtwv5',
     whatsapp: 'https://wa.me/919740018911',
-    linkedin: 'https://www.facebook.com/dhanusgoldfitness/',
     googleBusiness: 'https://maps.app.goo.gl/yB41yXc1GgFDYtwv5'
   }
 };
@@ -120,7 +119,7 @@ export const TRAINERS: Trainer[] = [
       'Expert Strength Coach',
       'Mr. Karnataka Medalist'
     ],
-    instagramUrl: 'https://instagram.com/dhanush_gold_fitness',
+    instagramUrl: 'https://www.instagram.com/dhanus_goldfitness/',
     experienceYears: 12
   },
   {
@@ -134,7 +133,7 @@ export const TRAINERS: Trainer[] = [
       'Expert Strength Coach',
       'Mr. Karnataka Medalist'
     ],
-    instagramUrl: 'https://instagram.com/dhanush_gold_fitness',
+    instagramUrl: 'https://www.instagram.com/dhanus_goldfitness/',
     experienceYears: 12
   },
   {
@@ -148,7 +147,7 @@ export const TRAINERS: Trainer[] = [
       'Certified Strength Coach',
       'Nutrition & Wellness Expert'
     ],
-    instagramUrl: 'https://instagram.com/dhanush_gold_fitness',
+    instagramUrl: 'https://www.instagram.com/dhanus_goldfitness/',
     experienceYears: 7
   },
   {
@@ -162,7 +161,7 @@ export const TRAINERS: Trainer[] = [
       'Biomechanics Specialist',
       'Corrective Exercise Expert'
     ],
-    instagramUrl: 'https://instagram.com/dhanush_gold_fitness',
+    instagramUrl: 'https://www.instagram.com/dhanus_goldfitness/',
     experienceYears: 6
   },
   {
@@ -176,7 +175,7 @@ export const TRAINERS: Trainer[] = [
       'Body Recomposition Coach',
       'Performance Enhancement Specialist'
     ],
-    instagramUrl: 'https://instagram.com/dhanush_gold_fitness',
+    instagramUrl: 'https://www.instagram.com/dhanus_goldfitness/',
     experienceYears: 7
   },
   {
@@ -190,7 +189,7 @@ export const TRAINERS: Trainer[] = [
       'Strength & Performance Specialist',
       'Clinical Nutritionist'
     ],
-    instagramUrl: 'https://instagram.com/dhanush_gold_fitness',
+    instagramUrl: 'https://www.instagram.com/dhanus_goldfitness/',
     experienceYears: 6
   }
 ];
