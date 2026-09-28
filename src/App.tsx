@@ -456,6 +456,14 @@ export default function App() {
 
   }, []);
 
+  // Tell Google Tag Manager / Analytics about the visitor's cookie choice
+  useEffect(() => {
+    if (analyticsConsent !== 'granted') return;
+    const w = window as any;
+    w.dataLayer = w.dataLayer || [];
+    w.dataLayer.push(['consent', 'update', { analytics_storage: 'granted' }]);
+  }, [analyticsConsent]);
+
   // Google Analytics only loads after the visitor accepts cookies
   useEffect(() => {
     if (!analyticsId || analyticsConsent !== 'granted') return;
