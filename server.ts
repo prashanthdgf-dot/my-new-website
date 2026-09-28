@@ -1,7 +1,6 @@
 import express from "express";
 import path from "path";
 import fs from "fs";
-import { createServer as createViteServer } from "vite";
 import { GoogleGenAI, ThinkingLevel, Modality, GenerateVideosOperation } from "@google/genai";
 import dotenv from "dotenv";
 import { generateSitemapXml, generateSitemapManifest } from "./src/utils/sitemapGenerator";
@@ -26,7 +25,7 @@ const getGeminiClient = () => {
   });
 };
 
-async function startServer() {
+export async function createApp() {
   const app = express();
   app.set("trust proxy", 1);
   const PORT = Number(process.env.PORT) || 3000;
@@ -808,6 +807,8 @@ Sitemap: ${siteUrl}/sitemap.xml
   };
 
   if (process.env.NODE_ENV !== "production") {
+    // Imported lazily so Vite is never bundled into the production / serverless build
+    const { createServer: createViteServer } = await import("vite");
     const vite = await createViteServer({
       server: { middlewareMode: true },
       appType: "custom",
@@ -847,9 +848,14 @@ Sitemap: ${siteUrl}/sitemap.xml
     });
   }
 
-  app.listen(PORT, "0.0.0.0", () => {
-    console.log(`Server running on http://localhost:${PORT}`);
-  });
+  return { app, PORT };
 }
 
-startServer();
+// On Vercel the app is exported through api/index.ts instead of listening on a port.
+if (!process.env.VERCEL) {
+  createApp().then(({ app, PORT }) => {
+    app.listen(PORT, "0.0.0.0", () => {
+      console.log(`Server running on http://localhost:${PORT}`);
+    });
+  });
+}
