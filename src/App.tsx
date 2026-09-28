@@ -10,6 +10,7 @@ import GoldLoader from './components/GoldLoader';
 import ScrollProgressBar from './components/ScrollProgressBar';
 import CustomCursor from './components/CustomCursor';
 import ErrorBoundary from './components/ErrorBoundary';
+import CookieConsent, { readConsent } from './components/CookieConsent';
 import { useLanguage } from './LanguageContext';
 import { updateMetaTags } from './lib/seo';
 import { getSupabaseClient, adminRoleFor } from './lib/supabase';
@@ -366,6 +367,8 @@ export default function App() {
 
   const [currentPath, setCurrentPath] = useState(window.location.pathname);
   const [userRole, setUserRole] = useState<string | null>(null);
+  const analyticsId = (import.meta as any).env.VITE_GOOGLE_ANALYTICS_ID as string | undefined;
+  const [analyticsConsent, setAnalyticsConsent] = useState<'granted' | 'denied' | null>(() => readConsent());
   const { t, language } = useLanguage();
 
   // Restore a staff session (and react to sign-out) only on the private routes, so normal
@@ -449,27 +452,27 @@ export default function App() {
       metaTag.setAttribute('content', verificationCode);
     }
 
-    // 2. Dynamic Google Analytics integration
-    const analyticsId = (import.meta as any).env.VITE_GOOGLE_ANALYTICS_ID;
-    if (analyticsId) {
-      const scriptSrc = document.createElement('script');
-      scriptSrc.async = true;
-      scriptSrc.src = `https://www.googletagmanager.com/gtag/js?id=${analyticsId}`;
-      document.head.appendChild(scriptSrc);
-
-      const scriptInit = document.createElement('script');
-      scriptInit.innerHTML = `
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', '${analyticsId}', {
-          page_path: window.location.pathname,
-          cookie_flags: 'SameSite=None;Secure'
-        });
-      `;
-      document.head.appendChild(scriptInit);
-    }
   }, []);
+
+  // Google Analytics only loads after the visitor accepts cookies
+  useEffect(() => {
+    if (!analyticsId || analyticsConsent !== 'granted') return;
+    if (document.getElementById('ga-loader')) return;
+    const scriptSrc = document.createElement('script');
+    scriptSrc.id = 'ga-loader';
+    scriptSrc.async = true;
+    scriptSrc.src = `https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(analyticsId)}`;
+    document.head.appendChild(scriptSrc);
+
+    const scriptInit = document.createElement('script');
+    scriptInit.text = `
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', ${JSON.stringify(analyticsId)}, { cookie_flags: 'SameSite=None;Secure' });
+    `;
+    document.head.appendChild(scriptInit);
+  }, [analyticsId, analyticsConsent]);
 
   const toggleTheme = () => {
     document.documentElement.classList.add('theme-transition');
@@ -719,6 +722,8 @@ export default function App() {
 
         {/* Structured Sitemap & SEO Metadata Footer */}
         <Footer currentPath={currentPath} onNavigate={navigate} />
+
+        {analyticsId && <CookieConsent onChoice={setAnalyticsConsent} />}
 
         {/* Sticky WhatsApp Coach Widget */}
         <WhatsAppFloat />

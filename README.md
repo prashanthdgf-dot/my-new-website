@@ -1,20 +1,33 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://ai.google.dev/static/site-assets/images/share-ais-513315318.png" />
-</div>
+# Dhanus Gold Fitness – website
 
-# Run and deploy your AI Studio app
+React + Vite front end with an Express server (SEO meta injection, Gemini AI endpoints, webhook intake).
+Hosted on Vercel (`api/index.js` serves the pre-bundled Express app, static files come from `dist/`).
 
-This contains everything you need to run your app locally.
+## Run locally
+```bash
+npm install
+cp .env.example .env.local     # then fill in the values
+npm run dev                    # http://localhost:3000
+```
 
-View your app in AI Studio: https://ai.studio/apps/f2a49fb9-cd7e-4cae-88a7-a1d406410be9
+## Build / deploy
+`npm run build:web` (used by Vercel) generates the sitemap, builds the site and bundles the server into
+`dist/server.cjs`. Pushing to `main` deploys to production.
 
-## Run Locally
+## Environment variables
+| Name | Purpose |
+|---|---|
+| `GEMINI_API_KEY` | AI features (server only) |
+| `VITE_SUPABASE_URL`, `VITE_SUPABASE_ANON_KEY` | Lead storage + staff login (Supabase project "DGF claude app") |
+| `VITE_GOOGLE_MAPS_API_KEY` | Interactive map (restrict the key to your domain) |
+| `VITE_GOOGLE_ANALYTICS_ID` | Analytics; only loads after cookie consent |
+| `VITE_GOOGLE_SITE_VERIFICATION` | Search Console verification |
+| `VITE_ADMIN_EMAILS` | Comma-separated staff emails allowed into `/ads-hub` |
+| `WEBHOOK_VERIFY_TOKEN`, `ADMIN_API_KEY` | Webhook handshake / admin-only API access |
+| `SITE_URL` | `https://www.dhanusgoldfitness.com` |
 
-**Prerequisites:**  Node.js
+## Where leads go
+Forms save to Supabase (`inquiries`, `free_trial_passes`, `bmi_logs`, insert-only RLS) and Firestore.
+Read them in the Supabase dashboard.
 
-
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+See `REPORT.md` for the audit notes.

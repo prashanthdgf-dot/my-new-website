@@ -130,6 +130,11 @@ export default function AdsHubPage({ userRole, onLogout }: { userRole: string; o
     <div className="pt-24 pb-20 bg-black min-h-screen text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
+        <div role="note" className="mb-6 rounded-xl border border-amber-700/40 bg-amber-950/30 px-4 py-3 text-xs text-amber-300">
+          <strong>Demo data:</strong> the campaigns, lead counts, charts and gateway status on this page are sample
+          numbers, not live data from Meta, Google or Twilio. Real leads are in your Supabase tables.
+        </div>
+
         {/* Header Block with logout */}
         <ScrollReveal y={-20}>
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-zinc-900 pb-6 mb-8">
