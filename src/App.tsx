@@ -367,7 +367,7 @@ export default function App() {
 
   const [currentPath, setCurrentPath] = useState(window.location.pathname);
   const [userRole, setUserRole] = useState<string | null>(null);
-  const analyticsId = (import.meta as any).env.VITE_GOOGLE_ANALYTICS_ID as string | undefined;
+  const analyticsId = ((import.meta as any).env.VITE_GOOGLE_ANALYTICS_ID as string | undefined) || 'G-M89Q1JNFST';
   const [analyticsConsent, setAnalyticsConsent] = useState<'granted' | 'denied' | null>(() => readConsent());
   const { t, language } = useLanguage();
 
