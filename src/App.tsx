@@ -12,6 +12,7 @@ import CustomCursor from './components/CustomCursor';
 import ErrorBoundary from './components/ErrorBoundary';
 import { useLanguage } from './LanguageContext';
 import { updateMetaTags } from './lib/seo';
+import { getSupabaseClient, adminRoleFor } from './lib/supabase';
 
 // =========================================================================
 // CODE-SPLITTING MAJOR FEATURE COMPONENTS (React.lazy)
@@ -366,6 +367,27 @@ export default function App() {
   const [currentPath, setCurrentPath] = useState(window.location.pathname);
   const [userRole, setUserRole] = useState<string | null>(null);
   const { t, language } = useLanguage();
+
+  // Restore a staff session (and react to sign-out) only on the private routes, so normal
+  // visitors never load the auth client.
+  useEffect(() => {
+    if (currentPath !== '/login' && currentPath !== '/ads-hub') return;
+    let unsub: (() => void) | undefined;
+    (async () => {
+      try {
+        const client = getSupabaseClient();
+        const { data } = await client.auth.getSession();
+        setUserRole(adminRoleFor(data.session?.user));
+        const sub = client.auth.onAuthStateChange((_event, session) => {
+          setUserRole(adminRoleFor(session?.user));
+        });
+        unsub = () => sub.data.subscription.unsubscribe();
+      } catch {
+        setUserRole(null);
+      }
+    })();
+    return () => unsub?.();
+  }, [currentPath]);
   const shouldReduceMotion = useReducedMotion();
 
   // Dynamic Route SEO & Open Graph Meta Tags (Updates on route or language change)
@@ -595,6 +617,7 @@ export default function App() {
         return (
           <Suspense fallback={<SectionSkeleton height="h-screen" />}>
             <AdsHubPage userRole={userRole} onLogout={() => {
+              getSupabaseClient().auth.signOut().catch(() => {});
               setUserRole(null);
               navigate('/');
             }} />

@@ -3,41 +3,40 @@ import { motion } from 'motion/react';
 import { Lock, User, AlertTriangle, RefreshCw } from 'lucide-react';
 import { useLanguage } from '../LanguageContext';
 import ScrollReveal from '../components/ScrollReveal';
+import { getSupabaseClient, adminRoleFor } from '../lib/supabase';
 
 export default function LoginPage({ onLoginSuccess }: { onLoginSuccess: (role: string) => void }) {
   const { language, t } = useLanguage();
-  const [role, setRole] = useState<'Owner' | 'Admin' | 'Marketing'>('Owner');
-  const [username, setUsername] = useState('owner');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
-  const handleRoleChange = (selectedRole: 'Owner' | 'Admin' | 'Marketing') => {
-    setRole(selectedRole);
-    if (selectedRole === 'Owner') setUsername('owner');
-    else if (selectedRole === 'Admin') setUsername('admin');
-    else setUsername('marketing');
-  };
-
-  const handleLogin = (e: React.FormEvent) => {
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
     setLoading(true);
-
-    setTimeout(() => {
-      setLoading(false);
-      const validPasswords: Record<string, string> = {
-        owner: 'dhanusgold',
-        admin: 'dhanusgold',
-        marketing: 'dhanusgold'
-      };
-
-      if (validPasswords[username] === password) {
-        onLoginSuccess(role);
-      } else {
-        setError(language === 'en' ? 'Incorrect credentials combination' : 'ತಪ್ಪಾದ ಬಳಕೆದಾರ ಹೆಸರು ಅಥವಾ ಪಾಸ್‌ವರ್ಡ್');
+    try {
+      const { data, error: authError } = await getSupabaseClient().auth.signInWithPassword({
+        email: email.trim(),
+        password,
+      });
+      if (authError || !data.user) {
+        setError(language === 'en' ? 'Incorrect email or password' : 'ತಪ್ಪಾದ ಇಮೇಲ್ ಅಥವಾ ಪಾಸ್‌ವರ್ಡ್');
+        return;
       }
-    }, 1200);
+      const role = adminRoleFor(data.user);
+      if (!role) {
+        await getSupabaseClient().auth.signOut();
+        setError(language === 'en' ? 'This account does not have staff access' : 'ಈ ಖಾತೆಗೆ ಸಿಬ್ಬಂದಿ ಪ್ರವೇಶವಿಲ್ಲ');
+        return;
+      }
+      onLoginSuccess(role);
+    } catch {
+      setError(language === 'en' ? 'Could not sign in right now. Please try again.' : 'ಈಗ ಲಾಗಿನ್ ಮಾಡಲಾಗಲಿಲ್ಲ. ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ.');
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -77,21 +76,6 @@ export default function LoginPage({ onLoginSuccess }: { onLoginSuccess: (role: s
             <p className="text-xs text-zinc-500 mt-2">{language === 'en' ? 'Dhanus Gold Fitness Management Credentials Check' : 'ಧನುಸ್ ಗೋಲ್ಡ್ ಫಿಟ್‌ನೆಸ್ ನಿರ್ವಹಣಾ ದೃಢೀಕರಣ'}</p>
           </div>
 
-          <div className="grid grid-cols-3 gap-2 mb-6 p-1 bg-black border border-zinc-900 rounded-xl relative z-10">
-            {(['Owner', 'Admin', 'Marketing'] as const).map((r) => (
-              <button
-                key={r}
-                type="button"
-                onClick={() => handleRoleChange(r)}
-                className={`py-2 text-[10px] sm:text-xs font-mono font-bold uppercase rounded-lg transition-all cursor-pointer ${
-                  role === r ? 'bg-[#FFC400] text-black font-black' : 'text-zinc-400 hover:text-white'
-                }`}
-              >
-                {r}
-              </button>
-            ))}
-          </div>
-
           <form onSubmit={handleLogin} className="space-y-4 relative z-10">
             {error && (
               <motion.div 
@@ -105,13 +89,14 @@ export default function LoginPage({ onLoginSuccess }: { onLoginSuccess: (role: s
             )}
 
             <div>
-              <label className="text-[10px] font-mono font-bold text-zinc-400 uppercase tracking-widest block mb-1.5">{language === 'en' ? 'Username Identifier' : 'ಬಳಕೆದಾರ ಹೆಸರು'}</label>
+              <label className="text-[10px] font-mono font-bold text-zinc-400 uppercase tracking-widest block mb-1.5">{language === 'en' ? 'Staff Email' : 'ಇಮೇಲ್'}</label>
               <div className="relative">
                 <User className="absolute left-3.5 top-3.5 w-4 h-4 text-zinc-550" />
                 <input 
-                  type="text" 
-                  value={username}
-                  onChange={(e) => setUsername(e.target.value)}
+                  type="email" 
+                  autoComplete="username"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                   className="w-full bg-black border border-zinc-850 rounded-xl pl-10 pr-4 py-3 text-xs text-white focus:outline-none focus:border-[#FFC400]"
                   required
                 />
@@ -124,6 +109,7 @@ export default function LoginPage({ onLoginSuccess }: { onLoginSuccess: (role: s
                 <Lock className="absolute left-3.5 top-3.5 w-4 h-4 text-zinc-550" />
                 <input 
                   type="password" 
+                  autoComplete="current-password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   className="w-full bg-black border border-zinc-850 rounded-xl pl-10 pr-4 py-3 text-xs text-white focus:outline-none focus:border-[#FFC400]"
@@ -138,7 +124,7 @@ export default function LoginPage({ onLoginSuccess }: { onLoginSuccess: (role: s
               className="w-full mt-6 py-4 bg-gradient-gold text-black font-sans font-black text-sm uppercase tracking-wider rounded-xl hover:shadow-lg transition-all flex items-center justify-center gap-2 cursor-pointer"
             >
               {loading ? <RefreshCw className="w-4 h-4 animate-spin" /> : null}
-              <span>{loading ? (language === 'en' ? 'Validating Token...' : 'ಪರಿಶೀಲಿಸಲಾಗುತ್ತಿದೆ...') : (language === 'en' ? 'Establish Secure Connection' : 'ಲಾಗಿನ್ ಮಾಡಿ')}</span>
+              <span>{loading ? (language === 'en' ? 'Signing in...' : 'ಪರಿಶೀಲಿಸಲಾಗುತ್ತಿದೆ...') : (language === 'en' ? 'Sign In' : 'ಲಾಗಿನ್ ಮಾಡಿ')}</span>
             </button>
           </form>
         </div>

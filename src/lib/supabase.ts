@@ -30,6 +30,26 @@ export const supabase = new Proxy({} as SupabaseClient, {
   }
 });
 
+/**
+ * Staff sign-in (Supabase Auth). Only these emails may open the admin console. Override with
+ * VITE_ADMIN_EMAILS="a@x.com,b@y.com". NOTE: this gates the UI only - never put real customer data
+ * behind /ads-hub without server-side checks (Supabase RLS policies keyed to these users).
+ */
+const ADMIN_EMAILS: string[] = (
+  ((import.meta as any).env?.VITE_ADMIN_EMAILS as string | undefined) ||
+  'dhanusgoldfitness@gmail.com,prashanthdgf@gmail.com'
+)
+  .split(',')
+  .map((e) => e.trim().toLowerCase())
+  .filter(Boolean);
+
+export function adminRoleFor(user: { email?: string | null; app_metadata?: Record<string, any> } | null | undefined): string | null {
+  const email = user?.email?.toLowerCase();
+  if (!email || !ADMIN_EMAILS.includes(email)) return null;
+  const role = user?.app_metadata?.role;
+  return role === 'Owner' || role === 'Admin' || role === 'Marketing' ? role : 'Owner';
+}
+
 export interface InquiryData {
   name: string;
   phone: string;
