@@ -1,0 +1,37 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Inquiries: Allow creation by public gym prospects with required fields
+    match /inquiries/{inquiryId} {
+      allow create: if request.resource.data.name is string 
+                    && request.resource.data.phone is string
+                    && request.resource.data.name.size() > 0
+                    && request.resource.data.phone.size() > 0;
+      allow read, update, delete: if false;
+    }
+
+    // Free Trial Passes: Allow creation by public applicants
+    match /free_trial_passes/{passId} {
+      allow create: if request.resource.data.name is string 
+                    && request.resource.data.phone is string
+                    && request.resource.data.name.size() > 0
+                    && request.resource.data.phone.size() > 0;
+      allow read, update, delete: if false;
+    }
+
+    // BMI Calculation Logs: Allow creation by user
+    match /bmi_logs/{logId} {
+      allow create: if request.resource.data.bmi is number
+                    && request.resource.data.category is string;
+      allow read, update, delete: if false;
+    }
+
+    // Webhook Events: Allow creation from webhook ingestion and read for monitoring
+    match /webhook_events/{eventId} {
+      allow create: if request.resource.data.source is string;
+      allow read: if true;
+      allow update, delete: if false;
+    }
+
+  }
+}

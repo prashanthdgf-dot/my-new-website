@@ -1,0 +1,421 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Space Grotesk", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+  
+  --color-gold-50: #fffbeb;
+  --color-gold-100: #fef3c7;
+  --color-gold-200: #fde68a;
+  --color-gold-300: #fcd34d;
+  --color-gold-400: #fbbf24;
+  --color-gold-500: #f59e0b;
+  --color-gold-600: #d97706;
+  --color-gold-700: #b45309;
+  --color-gold-800: #92400e;
+  --color-gold-900: #78350f;
+  --color-gold-950: #451a03;
+  --color-gold-premium: #FFC400;
+
+  /* Shades used in the code that Tailwind does not ship (they rendered as no colour / default border) */
+  --color-zinc-550: #63636b;
+  --color-zinc-750: #333338;
+  --color-zinc-850: #202023;
+}
+
+/* Smooth scrolling, scroll offset, and high-performance scrolling properties */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
+}
+
+section[id], div[id] {
+  scroll-margin-top: 5rem;
+}
+
+/* Offscreen rendering optimization for 60 FPS scrolling */
+.content-auto {
+  content-visibility: auto;
+  contain-intrinsic-size: 1px 700px;
+}
+
+/* GPU hardware acceleration helper */
+.gpu-layer {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  will-change: transform, opacity;
+}
+
+/* Reduced motion accessibility */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto !important;
+  }
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Custom scrollbar for premium feel */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #0d0d0d;
+}
+::-webkit-scrollbar-thumb {
+  background: #262626;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #FFC400;
+}
+
+/* Gold text utility - updated to solid Dhanus Gold #FFC400 */
+.text-gradient-gold {
+  color: #FFC400;
+}
+
+.bg-gradient-gold {
+  background-color: #FFD000;
+  color: #000000;
+}
+
+.border-gradient-gold {
+  border-color: #FFC400;
+}
+
+/* Ambient glow animations */
+@keyframes pulse-gold {
+  0%, 100% {
+    opacity: 0.15;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.3;
+    transform: scale(1.05);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.animate-pulse-gold {
+  animation: pulse-gold 4s infinite ease-in-out;
+}
+
+/* Golden Light Theme Overrides */
+.golden-light,
+.golden-light body {
+  background-color: #FAF8F2 !important;
+  color: #252015 !important;
+  color-scheme: light;
+}
+
+/* Background conversion */
+.golden-light .bg-black,
+.golden-light .bg-\[\#050505\],
+.golden-light .bg-\[\#070707\],
+.golden-light .bg-\[\#0B0B0B\],
+.golden-light .bg-\[\#0D0D0D\],
+.golden-light .bg-\[\#0f0f0f\] {
+  background-color: #FAF8F2 !important;
+}
+.golden-light .bg-zinc-950:not(#footer):not(#footer *) {
+  background-color: #F4EFE3 !important;
+}
+.golden-light .bg-zinc-900:not(#footer):not(#footer *):not(.fixed *),
+.golden-light .bg-zinc-850:not(#footer):not(#footer *):not(.fixed *) {
+  background-color: #EAE3D2 !important;
+}
+.golden-light .bg-zinc-900\/40,
+.golden-light .bg-zinc-850\/40 {
+  background-color: rgba(234, 227, 210, 0.4) !important;
+}
+.golden-light .bg-zinc-950\/40,
+.golden-light .bg-zinc-950\/30 {
+  background-color: rgba(244, 239, 227, 0.4) !important;
+}
+.golden-light .bg-zinc-950\/80 {
+  background-color: rgba(244, 239, 227, 0.8) !important;
+}
+.golden-light .bg-zinc-950\/90 {
+  background-color: rgba(244, 239, 227, 0.9) !important;
+}
+.golden-light .bg-black\/90 {
+  background-color: rgba(250, 248, 242, 0.9) !important;
+}
+.golden-light .bg-black\/80 {
+  background-color: rgba(250, 248, 242, 0.8) !important;
+}
+.golden-light .bg-black\/75 {
+  background-color: rgba(250, 248, 242, 0.75) !important;
+}
+.golden-light .bg-black\/95 {
+  background-color: rgba(250, 248, 242, 0.95) !important;
+}
+.golden-light .bg-black\/40,
+.golden-light .bg-black\/30,
+.golden-light .bg-black\/60 {
+  background-color: rgba(234, 227, 210, 0.4) !important;
+}
+
+/* Specific component element resets */
+.golden-light .border-white\/5,
+.golden-light .border-zinc-900,
+.golden-light .border-zinc-850 {
+  border-color: rgba(138, 100, 15, 0.12) !important;
+}
+.golden-light .border-white\/10,
+.golden-light .border-zinc-800 {
+  border-color: rgba(138, 100, 15, 0.2) !important;
+}
+.golden-light .border-white\/15,
+.golden-light .border-zinc-700 {
+  border-color: rgba(138, 100, 15, 0.28) !important;
+}
+.golden-light .border-white\/20,
+.golden-light .border-zinc-600 {
+  border-color: rgba(138, 100, 15, 0.35) !important;
+}
+.golden-light .divide-white\/5 > :not([hidden]) ~ :not([hidden]),
+.golden-light .divide-zinc-900 > :not([hidden]) ~ :not([hidden]),
+.golden-light .divide-zinc-850 > :not([hidden]) ~ :not([hidden]) {
+  border-color: rgba(138, 100, 15, 0.12) !important;
+}
+
+/* Specific element overrides to prevent dark theme style leaks */
+.golden-light h1.text-white,
+.golden-light h2.text-white,
+.golden-light h3.text-white:not(.group-hover\:text-gold-premium):not(.group *),
+.golden-light h4.text-white:not(#footer *):not(.fixed *),
+.golden-light h5.text-white,
+.golden-light span.text-white:not(.group *):not(.fixed *),
+.golden-light p.text-white:not(.group *):not(.fixed *),
+.golden-light a.text-white:not(.group *):not(.fixed *),
+.golden-light li.text-white,
+.golden-light .text-white:not(.group-hover\:text-gold-premium):not(.group *):not(.fixed *):not(#footer *) {
+  color: #1A150D !important;
+}
+
+.golden-light .text-zinc-400:not(.fixed *):not(#footer *),
+.golden-light .text-zinc-500:not(.fixed *):not(#footer *),
+.golden-light .text-zinc-600:not(.fixed *):not(#footer *) {
+  color: #6C5B3E !important;
+}
+
+.golden-light .text-zinc-300:not(.fixed *):not(#footer *) {
+  color: #4D412B !important;
+}
+
+.golden-light .text-zinc-200:not(.fixed *):not(#footer *) {
+  color: #3D3320 !important;
+}
+
+.golden-light .text-gray-100:not(#footer *):not(.fixed *) {
+  color: #2D2516 !important;
+}
+.golden-light .text-gray-200:not(#footer *):not(.fixed *) {
+  color: #3D3320 !important;
+}
+.golden-light .text-gray-300:not(.group *):not(.fixed *):not(#footer *) {
+  color: #4D412B !important;
+}
+.golden-light .text-gray-400:not(.fixed *):not(#footer *) {
+  color: #6C5B3E !important;
+}
+.golden-light .text-gray-500:not(.fixed *):not(#footer *) {
+  color: #8C7A59 !important;
+}
+
+/* Buttons & Interactive Elements inside light mode */
+.golden-light .hover\:bg-zinc-900:hover {
+  background-color: #EAE3D2 !important;
+}
+.golden-light .hover\:bg-zinc-800:hover {
+  background-color: #DDD5BF !important;
+}
+.golden-light .hover\:border-gold-premium\/30:hover {
+  border-color: rgba(212, 175, 55, 0.6) !important;
+}
+.golden-light .hover\:border-gold-premium\/40:hover {
+  border-color: rgba(212, 175, 55, 0.8) !important;
+}
+.golden-light .hover\:shadow-\[0_15px_40px_rgba\(0\,0\,0\,0\.5\)\]:hover {
+  box-shadow: 0 15px 40px rgba(138, 100, 15, 0.1) !important;
+}
+.golden-light .hover\:shadow-\[0_12px_35px_rgba\(0\,0\,0\,0\.3\)\]:hover {
+  box-shadow: 0 12px 35px rgba(138, 100, 15, 0.08) !important;
+}
+.golden-light .hover\:shadow-\[0_10px_35px_rgba\(212\,175\,55\,0\.06\)\]:hover {
+  box-shadow: 0 10px 35px rgba(212, 175, 55, 0.15) !important;
+}
+
+/* Keep form input values visible */
+.golden-light input,
+.golden-light textarea,
+.golden-light select {
+  background-color: #FAF8F2 !important;
+  color: #1A150D !important;
+  border-color: rgba(138, 100, 15, 0.25) !important;
+}
+.golden-light input::placeholder,
+.golden-light textarea::placeholder {
+  color: #8C7A59 !important;
+}
+.golden-light input:focus,
+.golden-light textarea:focus,
+.golden-light select:focus {
+  border-color: #D4AF37 !important;
+  outline: none;
+}
+
+/* Solid backgrounds for custom action links like "Request Session" or "Contact Us" */
+.golden-light a.bg-zinc-950,
+.golden-light button.bg-zinc-950 {
+  background-color: #1A150D !important;
+  color: #FAF8F2 !important;
+}
+.golden-light a.bg-zinc-950:hover,
+.golden-light button.bg-zinc-950:hover {
+  background-color: #3D3320 !important;
+  color: #FAF8F2 !important;
+}
+
+/* Gradients update for hero and parallax graphics */
+.golden-light .bg-gradient-to-r.from-black.via-black\/80.to-black\/40 {
+  background-image: linear-gradient(to right, #FAF8F2 0%, rgba(250, 248, 242, 0.85) 50%, rgba(250, 248, 242, 0.45) 100%) !important;
+}
+.golden-light .bg-gradient-to-t.from-black.via-transparent {
+  background-image: linear-gradient(to top, #FAF8F2 0%, transparent 100%) !important;
+}
+.golden-light .bg-gradient-to-b.from-black\/80.to-transparent {
+  background-image: linear-gradient(to bottom, rgba(250, 248, 242, 0.85) 0%, transparent 100%) !important;
+}
+.golden-light .bg-gradient-to-b.from-black\/90 {
+  background-image: linear-gradient(to bottom, rgba(250, 248, 242, 0.95) 0%, transparent 100%) !important;
+}
+.golden-light .bg-gradient-to-t.from-zinc-900.via-transparent {
+  background-image: linear-gradient(to top, #F4EFE3 0%, transparent 100%) !important;
+}
+
+/* Scrollbar adaptation */
+.golden-light ::-webkit-scrollbar-track {
+  background: #F4EFE3;
+}
+.golden-light ::-webkit-scrollbar-thumb {
+  background: #DDD5BF;
+}
+.golden-light ::-webkit-scrollbar-thumb:hover {
+  background: #D4AF37;
+}
+
+/* 3D Flip Card Utilities */
+.perspective-1000 {
+  perspective: 1000px;
+}
+
+.transform-style-3d {
+  transform-style: preserve-3d;
+}
+
+.backface-hidden {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.rotate-y-180 {
+  transform: rotateY(180deg);
+}
+
+/* Premium Gold Shadow Pulse Animation */
+@keyframes gold-pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(255, 196, 0, 0.5);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(255, 196, 0, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(255, 196, 0, 0);
+  }
+}
+
+.animate-gold-pulse {
+  animation: gold-pulse 2.2s infinite cubic-bezier(0.4, 0, 0.6, 1);
+}
+
+.text-gradient-lime {
+  color: #FFC400;
+}
+
+.bg-gradient-lime {
+  background-color: #FFD000;
+  color: #000000;
+}
+
+/* Technical blueprint grid pattern for floor map */
+.grid-bg {
+  background-size: 20px 20px;
+  background-image: 
+    linear-gradient(to right, rgba(255, 196, 0, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 196, 0, 0.04) 1px, transparent 1px);
+}
+
+.golden-light .grid-bg {
+  background-image: 
+    linear-gradient(to right, rgba(212, 175, 55, 0.06) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(212, 175, 55, 0.06) 1px, transparent 1px);
+}
+
+@keyframes hologram-sweep {
+  0% { transform: translateY(-100%); opacity: 0; }
+  50% { opacity: 1; }
+  100% { transform: translateY(1000%); opacity: 0; }
+}
+
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+.animate-shimmer {
+  animation: shimmer 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.animate-hologram-sweep {
+  animation: hologram-sweep 4s linear infinite;
+}
+
+.text-glow-gold {
+  text-shadow: 0 0 15px rgba(255, 196, 0, 0.5), 0 0 30px rgba(255, 196, 0, 0.2);
+}
+
+.bg-scanlines {
+  background: linear-gradient(
+    to bottom,
+    transparent 50%,
+    rgba(0, 0, 0, 0.5) 50%
+  );
+  background-size: 100% 4px;
+}
+
+/* Theme Transition Enhancement */
+.theme-transition,
+.theme-transition *,
+.theme-transition *:before,
+.theme-transition *:after {
+  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  transition-delay: 0s !important;
+}
+
+

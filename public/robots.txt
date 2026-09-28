@@ -1,0 +1,14 @@
+# Dhanus Gold Fitness SEO Robots Configuration
+User-agent: *
+Allow: /
+
+# Protected Routes
+Disallow: /admin/
+Disallow: /api/
+Disallow: /ads-hub
+Disallow: /login
+Disallow: /integrations
+Disallow: /webhooks
+
+# Sitemaps Location
+Sitemap: https://www.dhanusgoldfitness.com/sitemap.xml

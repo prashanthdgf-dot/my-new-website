@@ -1,0 +1,6 @@
+{
+  "name": "Dhanus Gold Fitness",
+  "description": "Premium fitness center and luxury gym in Kengeri, Bengaluru. State-of-the-art strength equipment, cardio arena, personal training, and steam bath.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
