@@ -3,7 +3,7 @@
 I reviewed the code by reading it; I could not run the site (npm installs were blocked in my environment). Please run `npm install && npm run lint && npm run build` once on your side to confirm.
 
 ## DO THESE YOURSELF (I can't from here)
-1. **Rotate the Google Maps key** `AQ.Ab8RN6…` – it is hard-coded in `public/locator.html` (still there) and was in `GymGoogleMap.tsx`. Create a new key, restrict it to your domain (HTTP referrers) + Maps JS API only, then put it in `VITE_GOOGLE_MAPS_API_KEY` and in locator.html.
+1. **Rotate the Google Maps key** (starts `AQ.Ab8RN6`) – it was hard-coded in `public/locator.html` and `GymGoogleMap.tsx`; I removed it from both (locator.html now has `REPLACE_WITH_YOUR_NEW_MAPS_API_KEY`). It is still in the old repo history, so treat it as leaked: create a new key restricted to your domain + Maps JS API, put it in `VITE_GOOGLE_MAPS_API_KEY` and in locator.html.
 2. **Change the admin login.** `/login` accepts owner / admin / marketing with password `dhanusgold` – checked in the browser, so anyone can read it in the JS bundle. Replace with real auth (e.g. Firebase Auth) before storing anything real behind `/ads-hub`.
 3. **Firestore rules – `webhook_events` is `read: true`**, so anyone can read leads/WhatsApp payloads straight from Firestore. Fix properly by writing/reading webhook events from the server with the Firebase Admin SDK and setting `read, write: if false`. (I didn't change this rule because doing so breaks the current events reader.)
 4. Set `WEBHOOK_VERIFY_TOKEN`, `ADMIN_API_KEY`, `VITE_SUPABASE_ANON_KEY` in your host's environment. Change the default webhook token `dhanus_gold_webhook_token` (it was public).
