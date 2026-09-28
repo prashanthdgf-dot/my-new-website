@@ -4,6 +4,7 @@ import fs from "fs";
 import { GoogleGenAI, ThinkingLevel, Modality, GenerateVideosOperation } from "@google/genai";
 import dotenv from "dotenv";
 import { generateSitemapXml, generateSitemapManifest } from "./src/utils/sitemapGenerator";
+import { buildCrawlerShell } from "./src/utils/crawlerShell";
 import { addWebhookEventToFirestore, getRecentWebhookEvents } from "./src/lib/firebase";
 
 dotenv.config();
@@ -800,6 +801,11 @@ Sitemap: ${siteUrl}/sitemap.xml
       .replace(/<meta name="twitter:title" content=".*?" \/>/, () => `<meta name="twitter:title" content="${meta.title}" />`)
       .replace(/<meta name="twitter:description" content=".*?" \/>/, () => `<meta name="twitter:description" content="${meta.desc}" />`)
       .replace(/<meta name="twitter:image" content=".*?" \/>/, () => `<meta name="twitter:image" content="${meta.image}" />`);
+    // Give crawlers real text in the first response; React replaces it on load.
+    if (known && !NOINDEX_PATHS.has(clean)) {
+      const shell = buildCrawlerShell(base.title, base.desc, clean);
+      out = out.replace('<div id="root"></div>', () => `<div id="root">${shell}</div>`);
+    }
     if (NOINDEX_PATHS.has(clean) || !known) {
       out = out.replace(/<meta name="robots" content=".*?" \/>/, () => `<meta name="robots" content="noindex, nofollow" />`);
     }
