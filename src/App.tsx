@@ -12,7 +12,7 @@ import CustomCursor from './components/CustomCursor';
 import ErrorBoundary from './components/ErrorBoundary';
 import CookieConsent, { readConsent } from './components/CookieConsent';
 import { useLanguage } from './LanguageContext';
-import { updateMetaTags } from './lib/seo';
+import { updateMetaTags, clearRouteSchemas } from './lib/seo';
 import { getSupabaseClient, adminRoleFor } from './lib/supabase';
 
 // =========================================================================
@@ -415,6 +415,7 @@ export default function App() {
 
   useEffect(() => {
     const handlePopState = () => {
+      clearRouteSchemas();
       setCurrentPath(window.location.pathname);
     };
     window.addEventListener('popstate', handlePopState);
@@ -422,6 +423,7 @@ export default function App() {
   }, []);
 
   const navigate = (path: string) => {
+    clearRouteSchemas();
     window.history.pushState(null, '', path);
     setCurrentPath(path);
     window.scrollTo({ top: 0, behavior: 'instant' });

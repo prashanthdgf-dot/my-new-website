@@ -85,10 +85,12 @@ export const removeJsonLd = (schemaId: string) => {
  * Injects breadcrumbs schema for a specific route
  */
 export const setBreadcrumbsSchema = (items: { name: string; path: string }[]) => {
+  // A breadcrumb trail must start at Home
+  const trail = items[0]?.path === '/' ? items : [{ name: 'Home', path: '/' }, ...items];
   const schema = {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
-    itemListElement: items.map((item, idx) => ({
+    itemListElement: trail.map((item, idx) => ({
       '@type': 'ListItem',
       position: idx + 1,
       name: item.name,
@@ -115,4 +117,13 @@ export const setFaqSchema = (faqs: { question: string; answer: string }[]) => {
     })),
   };
   injectJsonLd('schema-faq', schema);
+};
+
+/**
+ * Page-level schema (breadcrumbs, FAQ) must not leak onto the next page, otherwise Google sees
+ * an FAQPage on URLs that have no FAQ. Call before navigating.
+ */
+export const clearRouteSchemas = () => {
+  removeJsonLd('schema-breadcrumbs');
+  removeJsonLd('schema-faq');
 };

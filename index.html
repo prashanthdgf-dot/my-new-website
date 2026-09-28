@@ -46,131 +46,149 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
 
-    <!-- Breadcrumbs & Service Offer Catalog Structured Data -->
+    <!-- Local business + website structured data (page-level breadcrumbs/FAQ are added per route) -->
     <script type="application/ld+json">
       {
-        "@context": "https://schema.org",
-        "@graph": [
-          {
-            "@type": ["HealthClub", "SportsActivityLocation", "ExerciseGym"],
-            "@id": "https://www.dhanusgoldfitness.com/#gym",
-            "name": "Dhanus Gold Fitness",
-            "description": "Dhanus Gold Fitness is a gym and personal training centre in Kengeri, Bengaluru offering strength training, bodybuilding, fat-loss programs, healthy weight gain and body transformation coaching.",
-            "image": "https://res.cloudinary.com/dnnfzhrbd/image/upload/v1782845589/_A0A5520_ewwv0e.jpg",
-            "url": "https://www.dhanusgoldfitness.com",
-            "telephone": "+919740018911",
-            "email": "dhanusgoldfitness@gmail.com",
-            "address": {
-              "@type": "PostalAddress",
-              "streetAddress": "3rd & 4th Floor, No. 18, Hoysala Circle, Outer Ring Road, above Trends Junior, opposite Shoppers Choice, Valagerahalli, Gnanabharathi Stage II, Kengeri Satellite Town",
-              "addressLocality": "Bengaluru",
-              "postalCode": "560060",
-              "addressRegion": "Karnataka",
-              "addressCountry": "IN"
+      "@context": "https://schema.org",
+      "@graph": [
+            {
+                  "@type": [
+                        "HealthClub",
+                        "SportsActivityLocation",
+                        "ExerciseGym"
+                  ],
+                  "@id": "https://www.dhanusgoldfitness.com/#gym",
+                  "name": "Dhanus Gold Fitness",
+                  "description": "Dhanus Gold Fitness is a gym and personal training centre in Kengeri, Bengaluru offering strength training, bodybuilding, fat-loss programs, healthy weight gain and body transformation coaching.",
+                  "image": "https://res.cloudinary.com/dnnfzhrbd/image/upload/v1782845589/_A0A5520_ewwv0e.jpg",
+                  "url": "https://www.dhanusgoldfitness.com",
+                  "telephone": "+919740018911",
+                  "email": "dhanusgoldfitness@gmail.com",
+                  "address": {
+                        "@type": "PostalAddress",
+                        "streetAddress": "3rd & 4th Floor, No. 18, Hoysala Circle, Outer Ring Road, above Trends Junior, opposite Shoppers Choice, Valagerahalli, Gnanabharathi Stage II, Kengeri Satellite Town",
+                        "addressLocality": "Bengaluru",
+                        "postalCode": "560060",
+                        "addressRegion": "Karnataka",
+                        "addressCountry": "IN"
+                  },
+                  "geo": {
+                        "@type": "GeoCoordinates",
+                        "latitude": 12.9247426,
+                        "longitude": 77.4855608
+                  },
+                  "hasMap": "https://maps.app.goo.gl/yB41yXc1GgFDYtwv5",
+                  "hasOfferCatalog": {
+                        "@type": "OfferCatalog",
+                        "name": "Fitness & Training Programs",
+                        "itemListElement": [
+                              {
+                                    "@type": "OfferCatalog",
+                                    "name": "Personal Training Services",
+                                    "url": "https://www.dhanusgoldfitness.com/training"
+                              },
+                              {
+                                    "@type": "OfferCatalog",
+                                    "name": "Body Transformations & Weight Loss",
+                                    "url": "https://www.dhanusgoldfitness.com/transformations"
+                              },
+                              {
+                                    "@type": "OfferCatalog",
+                                    "name": "Certified Personal Trainers",
+                                    "url": "https://www.dhanusgoldfitness.com/trainers"
+                              }
+                        ]
+                  },
+                  "openingHoursSpecification": [
+                        {
+                              "@type": "OpeningHoursSpecification",
+                              "dayOfWeek": [
+                                    "Monday",
+                                    "Tuesday",
+                                    "Wednesday",
+                                    "Thursday",
+                                    "Friday",
+                                    "Saturday"
+                              ],
+                              "opens": "05:30",
+                              "closes": "22:00"
+                        },
+                        {
+                              "@type": "OpeningHoursSpecification",
+                              "dayOfWeek": "Sunday",
+                              "opens": "17:00",
+                              "closes": "21:00"
+                        }
+                  ],
+                  "sameAs": [
+                        "https://maps.app.goo.gl/yB41yXc1GgFDYtwv5",
+                        "https://www.instagram.com/dhanus_goldfitness/",
+                        "https://www.facebook.com/people/Dhanus-Goldfitness/100079558913150/",
+                        "https://www.youtube.com/@dhanusgoldfitnesskengeri"
+                  ],
+                  "logo": "https://res.cloudinary.com/dnnfzhrbd/image/upload/v1782844122/facebook_profile_ijvgug.png",
+                  "priceRange": "₹₹",
+                  "areaServed": [
+                        {
+                              "@type": "City",
+                              "name": "Bengaluru"
+                        },
+                        {
+                              "@type": "Place",
+                              "name": "Kengeri"
+                        },
+                        {
+                              "@type": "Place",
+                              "name": "Kengeri Satellite Town"
+                        },
+                        {
+                              "@type": "Place",
+                              "name": "Rajarajeshwari Nagar"
+                        }
+                  ],
+                  "currenciesAccepted": "INR"
             },
-            "geo": {
-              "@type": "GeoCoordinates",
-              "latitude": "12.9174",
-              "longitude": "77.4836"
-            },
-            "hasMap": "https://maps.app.goo.gl/yB41yXc1GgFDYtwv5",
-            "hasOfferCatalog": {
-              "@type": "OfferCatalog",
-              "name": "Fitness & Training Programs",
-              "itemListElement": [
-                {
-                  "@type": "OfferCatalog",
-                  "name": "Personal Training Services",
-                  "url": "https://www.dhanusgoldfitness.com/training"
-                },
-                {
-                  "@type": "OfferCatalog",
-                  "name": "Body Transformations & Weight Loss",
-                  "url": "https://www.dhanusgoldfitness.com/transformations"
-                },
-                {
-                  "@type": "OfferCatalog",
-                  "name": "Certified Personal Trainers",
-                  "url": "https://www.dhanusgoldfitness.com/trainers"
-                }
-              ]
-            },
-            "openingHoursSpecification": [
-              {
-                "@type": "OpeningHoursSpecification",
-                "dayOfWeek": [
-                  "Monday",
-                  "Tuesday",
-                  "Wednesday",
-                  "Thursday",
-                  "Friday",
-                  "Saturday"
-                ],
-                "opens": "05:30",
-                "closes": "22:00"
-              },
-              {
-                "@type": "OpeningHoursSpecification",
-                "dayOfWeek": "Sunday",
-                "opens": "17:00",
-                "closes": "21:00"
-              }
-            ],
-            "sameAs": [
-              "https://maps.app.goo.gl/yB41yXc1GgFDYtwv5",
-              "https://www.instagram.com/dhanus_goldfitness/",
-              "https://www.facebook.com/people/Dhanus-Goldfitness/100079558913150/",
-              "https://www.youtube.com/@dhanusgoldfitnesskengeri"
-            ]
-          },
-          {
-            "@type": "BreadcrumbList",
-            "@id": "https://www.dhanusgoldfitness.com/#breadcrumbs",
-            "itemListElement": [
-              {
-                "@type": "ListItem",
-                "position": 1,
-                "name": "Home",
-                "item": "https://www.dhanusgoldfitness.com/"
-              },
-              {
-                "@type": "ListItem",
-                "position": 2,
-                "name": "Personal Training",
-                "item": "https://www.dhanusgoldfitness.com/training"
-              },
-              {
-                "@type": "ListItem",
-                "position": 3,
-                "name": "Body Transformations",
-                "item": "https://www.dhanusgoldfitness.com/transformations"
-              },
-              {
-                "@type": "ListItem",
-                "position": 4,
-                "name": "Certified Trainers",
-                "item": "https://www.dhanusgoldfitness.com/trainers"
-              },
-              {
-                "@type": "ListItem",
-                "position": 5,
-                "name": "About Dhanus Gold",
-                "item": "https://www.dhanusgoldfitness.com/about"
-              },
-              {
-                "@type": "ListItem",
-                "position": 6,
-                "name": "Contact & Location",
-                "item": "https://www.dhanusgoldfitness.com/contact"
-              }
-            ]
-          }
-        ]
-      }
+            {
+                  "@type": "WebSite",
+                  "@id": "https://www.dhanusgoldfitness.com/#website",
+                  "url": "https://www.dhanusgoldfitness.com/",
+                  "name": "Dhanus Gold Fitness",
+                  "inLanguage": [
+                        "en",
+                        "kn"
+                  ],
+                  "publisher": {
+                        "@id": "https://www.dhanusgoldfitness.com/#gym"
+                  }
+            }
+      ]
+}
     </script>
   </head>
   <body class="bg-black text-gray-100 selection:bg-yellow-500 selection:text-black antialiased">
     <div id="root"></div>
+    <noscript>
+      <main style="max-width:720px;margin:0 auto;padding:24px;font-family:sans-serif;color:#eee;background:#000">
+        <h1>Dhanus Gold Fitness – Best Gym &amp; Personal Training in Kengeri, Bengaluru</h1>
+        <p>3-floor gym at Hoysala Circle, Kengeri Satellite Town, Bengaluru 560060 with certified personal trainers, strength and cardio floors, women's cardio zone, group fitness and nutrition guidance.</p>
+        <p>Call or WhatsApp <a href="tel:+919740018911" style="color:#FFC400">+91 97400 18911</a>. Open Mon–Sat 5:30 AM–10 PM, Sun 5–9 PM.</p>
+        <ul>
+          <li><a href="/gym-in-kengeri" style="color:#FFC400">Gym in Kengeri</a></li>
+          <li><a href="/personal-training-kengeri" style="color:#FFC400">Personal training in Kengeri</a></li>
+          <li><a href="/weight-loss-training-kengeri" style="color:#FFC400">Weight loss training</a></li>
+          <li><a href="/muscle-building-kengeri" style="color:#FFC400">Muscle building</a></li>
+          <li><a href="/womens-fitness-kengeri" style="color:#FFC400">Women's fitness</a></li>
+          <li><a href="/group-fitness" style="color:#FFC400">Group fitness &amp; Zumba</a></li>
+          <li><a href="/nutrition-guidance" style="color:#FFC400">Nutrition guidance</a></li>
+          <li><a href="/transformations" style="color:#FFC400">Member transformations</a></li>
+          <li><a href="/trainers" style="color:#FFC400">Our trainers</a></li>
+          <li><a href="/reviews" style="color:#FFC400">Reviews</a></li>
+          <li><a href="/faq" style="color:#FFC400">FAQ</a></li>
+          <li><a href="/contact" style="color:#FFC400">Contact &amp; location</a></li>
+        </ul>
+      </main>
+    </noscript>
+
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
